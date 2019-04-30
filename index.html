@@ -260,64 +260,65 @@
     </style>
 </head>
 <body>
+<div class="king">
+    <div class="player-layout">
+        <div class="group group1">
+            <div class="player1 player"></div>
+            <div class="player2 player"></div>
+            <div class="player3 player"></div>
+            <div class="player4 player"></div>
+            <div class="player5 player"></div>
+        </div>
+        <div class="center"><img src="../static/custom/image/diaochan.jpg"></div>
+        <div class="group group2">
+            <div class="player6 player"></div>
+            <div class="player7 player"></div>
+            <div class="player8 player"></div>
+            <div class="player9 player"></div>
+            <div class="player10 player"></div>
+        </div>
+    </div>
+    <div class="matrix">
+        <div class="border border1"></div>
+        <div class="border border2"></div>
+    </div>
+    <div class="button">确认</div>
+</div>
 
-<!-- HTML -->
-<table id="out" border="1" style="cursor: pointer;">
-    <tr>
-        　　
-        <td>table01</td>
-        　　
-        <td>table02</td>
-        　　
-        <td>table03</td>
-        　　
-        <td>table04</td>
-        　　
-        <td>table05</td>
-        　　
-        <td>table06</td>
-        　　
-        <td>table07</td>
-        　　
-        <td>table08</td>
-        　　
-        <td>table09</td>
-        　　
-        <td>table10</td>
-    </tr>
-</table>
-
+<div class="fater">
+    <div class="son a1"></div>
+    <div class="son a2"></div>
+    <div class="son a3"></div>
+</div>
+<div>
+    <ul>
+        <li>
+            冒泡/捕获
+        </li>
+    </ul>
+</div>
 </body>
 <script>
-    var out = document.getElementById("out");
-    if (out.addEventListener) {
-        out.addEventListener("click", function (e) {
-            var e = e || window.event;
-            //IE没有e.target，有e.srcElement
-            var target = e.target || e.srcElement;
-            //判断事件目标是否是td，是的话target即为目标节点td
-            if (target.tagName.toLowerCase() == "td") {
-                changeStyle(target);
-                console.log(target.innerHTML);
-            }
-        }, false);
-    } else {
-        out.attachEvent("onclick", function (e) {
-            var e = e || window.event;
-            //IE没有e.target，有e.srcElement
-            var target = e.target || e.srcElement;
-            //判断事件目标是否是td，是的话target即为目标节点td
-            if (target.tagName.toLowerCase() == "td") {
-                changeStyle(target);
-                console.log(target.innerHTML);
-            }
-        });
+    var html = document.documentElement;
+    var body = document.body;
+    var div = body.querySelector('div');
+    var ul = body.querySelector('ul');
+    var li = body.querySelector('li');
+
+    ul.addEventListener('click', callback, true);
+    li.addEventListener('click', callback, true);
+    div.addEventListener('click', callbackdiv);
+    body.addEventListener('click', callback);
+    html.addEventListener('click', callback);
+
+    function callback(event){
+        var target = event.currentTarget;
+        console.log(target.tagName);
     }
 
-    function changeStyle(ele) {
-        ele.innerHTML = "已点击"
-        ele.style.background = "#900";
-        ele.style.color = "#fff";
+    function callbackdiv(event){
+        event.stopPropagation();
+        console.log('callbackdiv');
     }
 </script>
 </html>
